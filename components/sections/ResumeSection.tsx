@@ -1,10 +1,15 @@
-import RetroWindow from "@/components/RetroWindow";
+import SectionCard from "@/components/v3/SectionCard";
 
 const RESUME_PATH = "/Abir-Hirani-Resume.pdf";
 
 export default function ResumeSection() {
   return (
-    <RetroWindow id="resume" title="C:\PORTFOLIO\RESUME.DOC" objCount={2}>
+    <SectionCard
+      id="resume"
+      label="08 · Resume"
+      title="The full rundown"
+      art={{ colorA: "#e4dcc8", colorB: "#fbf8ee", seed: 8 }}
+    >
       <p className="text-base sm:text-lg mb-8">
         Download or view the full resume for the complete rundown.
       </p>
@@ -12,19 +17,21 @@ export default function ResumeSection() {
         <a
           href={RESUME_PATH}
           download="Abir-Hirani-Resume.pdf"
-          className="bevel-out px-5 py-2 text-center font-pixel-title text-xs text-win-text"
+          className="card px-5 py-2.5 text-center text-sm"
+          style={{ background: "var(--surface-dim)" }}
         >
-          DOWNLOAD
+          Download
         </a>
         <a
           href={RESUME_PATH}
           target="_blank"
           rel="noopener noreferrer"
-          className="bevel-out px-5 py-2 text-center font-pixel-title text-xs text-win-text"
+          className="card px-5 py-2.5 text-center text-sm"
+          style={{ background: "var(--surface-dim)" }}
         >
-          VIEW
+          View
         </a>
       </div>
-    </RetroWindow>
+    </SectionCard>
   );
 }

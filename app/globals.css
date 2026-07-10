@@ -1,67 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  /* Light — classic Win98 gray/beige chrome */
-  --win-face: #c0c0c0;
-  --win-face-hi: #dcdcdc;
-  --win-window-bg: #fdfdf7;
-  --win-text: #0a0a0a;
-  --win-text-dim: #4a4a4a;
-  --win-titlebar-start: #000080;
-  --win-titlebar-end: #1084d0;
-  --win-titlebar-text: #ffffff;
-  --win-border-dark: #404040;
-  --win-accent: #000080;
-  --win-link: #0000ee;
-  --win-desktop-icon-text: #0a0a0a;
-  --win-desktop-icon-selected: #000080;
+  /* Light — soft lavender/editorial */
+  --bg: #eef1f8;
+  --surface: #fbfbfe;
+  --surface-dim: #e4e8f6;
+  --border: #c9d2ea;
+  --ink: #1c2340;
+  --ink-dim: #5b628a;
+  --accent: #3d4b91;
+  --accent-soft: #7c88c9;
+  --glow-a: rgba(124, 136, 201, 0.25);
+  --glow-b: rgba(200, 180, 220, 0.2);
 
-  --dither-a: #d8d4c4;
-  --dither-b: #14120e;
-
-  --background: var(--win-face);
-  --foreground: var(--win-text);
+  --background: var(--bg);
+  --foreground: var(--ink);
 }
 
 :root[data-theme="dark"] {
-  /* Dark — black/green terminal */
-  --win-face: #16181a;
-  --win-face-hi: #22262a;
-  --win-window-bg: #0a0d0a;
-  --win-text: #7fe08c;
-  --win-text-dim: #4f9a5c;
-  --win-titlebar-start: #0c1f10;
-  --win-titlebar-end: #1c4423;
-  --win-titlebar-text: #b9ffc4;
-  --win-border-dark: #000000;
-  --win-accent: #33ff66;
-  --win-link: #7fe08c;
-  --win-desktop-icon-text: #b9ffc4;
-  --win-desktop-icon-selected: #1c4423;
+  /* Dark — deep navy with soft gradient glows */
+  --bg: #0a0c16;
+  --surface: #12162a;
+  --surface-dim: #0e1120;
+  --border: #262c4a;
+  --ink: #e4e7f5;
+  --ink-dim: #9aa0c3;
+  --accent: #8b9dff;
+  --accent-soft: #5c67a8;
+  --glow-a: rgba(139, 157, 255, 0.16);
+  --glow-b: rgba(124, 100, 170, 0.14);
 
-  --dither-a: #04140a;
-  --dither-b: #1f8f47;
-
-  --background: var(--win-face);
-  --foreground: var(--win-text);
+  --background: var(--bg);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-win-face: var(--win-face);
-  --color-win-face-hi: var(--win-face-hi);
-  --color-win-window-bg: var(--win-window-bg);
-  --color-win-text: var(--win-text);
-  --color-win-text-dim: var(--win-text-dim);
-  --color-win-titlebar-start: var(--win-titlebar-start);
-  --color-win-titlebar-end: var(--win-titlebar-end);
-  --color-win-titlebar-text: var(--win-titlebar-text);
-  --color-win-border-dark: var(--win-border-dark);
-  --color-win-accent: var(--win-accent);
-  --color-win-link: var(--win-link);
-  --font-pixel-title: var(--font-pixel-title);
-  --font-pixel-body: var(--font-pixel-body);
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-border: var(--border);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-serif-accent: var(--font-serif-accent);
+  --font-sans-body: var(--font-sans-body);
+  --font-mono-data: var(--font-mono-data);
 }
 
 html {
@@ -71,55 +56,64 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-pixel-body), monospace;
-  font-size: 1.1rem;
-  line-height: 1.4;
+  font-family: var(--font-sans-body), sans-serif;
+  line-height: 1.5;
   overflow-x: hidden;
 }
 
-.font-pixel-title {
-  font-family: var(--font-pixel-title), monospace;
+.font-serif-accent {
+  font-family: var(--font-serif-accent), serif;
 }
 
-/* Classic Windows 3D chrome — CSS outset/inset auto-derives the bevel
-   shades from a single base color, so no manual light/dark corners needed. */
-.bevel-out {
-  border-width: 2px;
-  border-style: outset;
-  border-color: var(--win-face);
-  background: var(--win-face);
+.font-mono-data {
+  font-family: var(--font-mono-data), monospace;
+  font-variant-numeric: tabular-nums;
 }
 
-.bevel-in {
-  border-width: 2px;
-  border-style: inset;
-  border-color: var(--win-face);
-  background: var(--win-face);
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 2px rgba(20, 20, 40, 0.04);
 }
 
-.bevel-out:active {
-  border-style: inset;
+.dashed-divider {
+  border: none;
+  border-top: 1px dashed var(--border);
 }
 
-.win-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: var(--win-face-hi) var(--win-window-bg);
+.label {
+  font-family: var(--font-mono-data), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
 }
 
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+.atmosphere-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 10%, var(--glow-a), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 90% 80%, var(--glow-b), transparent 60%);
 }
 
-.blink {
-  animation: blink 1s steps(1) infinite;
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 6s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .blink {
+  .spin {
     animation: none;
   }
 }

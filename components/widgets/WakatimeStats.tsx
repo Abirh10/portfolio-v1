@@ -28,28 +28,33 @@ export default function WakatimeStats() {
   }, []);
 
   if (data === null) {
-    return <p className="text-sm text-win-text-dim">Loading coding stats…</p>;
+    return <p className="text-sm" style={{ color: "var(--ink-dim)" }}>Loading…</p>;
   }
 
   if (!data.configured) {
-    return <p className="text-sm text-win-text-dim">Not connected — WakaTime offline.</p>;
+    return (
+      <p className="text-sm" style={{ color: "var(--ink-dim)" }}>
+        Not connected — WakaTime offline.
+      </p>
+    );
   }
 
   return (
     <div>
-      <p className="text-sm mb-1">Last 7 days: {data.totalText ?? "N/A"}</p>
-      <p className="text-sm text-win-text-dim mb-3">Daily average: {data.dailyAverageText ?? "N/A"}</p>
+      <p className="text-sm mb-3">{data.totalText ?? "N/A"} in the last 7 days</p>
       <div className="flex flex-col gap-1.5">
-        {data.languages?.map((lang) => (
+        {data.languages?.slice(0, 3).map((lang) => (
           <div key={lang.name} className="flex items-center gap-2 text-xs">
-            <span className="w-20 shrink-0 truncate">{lang.name}</span>
-            <span className="bevel-in flex-1 h-3">
+            <span className="w-16 shrink-0 truncate">{lang.name}</span>
+            <span className="rounded-full flex-1 h-2 overflow-hidden" style={{ background: "var(--surface)" }}>
               <span
-                className="block h-full"
-                style={{ width: `${lang.percent}%`, background: "var(--win-accent)" }}
+                className="block h-full rounded-full"
+                style={{ width: `${lang.percent}%`, background: "var(--accent)" }}
               />
             </span>
-            <span className="w-10 text-right shrink-0">{lang.percent.toFixed(0)}%</span>
+            <span className="w-9 text-right shrink-0" style={{ color: "var(--ink-dim)" }}>
+              {lang.percent.toFixed(0)}%
+            </span>
           </div>
         ))}
       </div>

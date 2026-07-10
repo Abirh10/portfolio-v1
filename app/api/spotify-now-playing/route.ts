@@ -50,6 +50,7 @@ export async function GET() {
         name: data.item.name,
         artists: data.item.artists?.map((a: { name: string }) => a.name).join(", "),
         url: data.item.external_urls?.spotify,
+        albumImageUrl: data.item.album?.images?.[0]?.url,
       },
     });
   } catch {

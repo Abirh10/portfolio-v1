@@ -1,25 +1,30 @@
 import type { Metadata } from "next";
-import { Silkscreen, VT323 } from "next/font/google";
+import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/theme/ThemeProvider";
-import { WindowManagerProvider } from "@/components/WindowManager";
 
-const silkscreen = Silkscreen({
-  variable: "--font-pixel-title",
-  weight: "400",
+const fraunces = Fraunces({
+  variable: "--font-serif-accent",
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
-const vt323 = VT323({
-  variable: "--font-pixel-body",
-  weight: "400",
+const inter = Inter({
+  variable: "--font-sans-body",
+  subsets: ["latin"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-mono-data",
+  weight: ["400", "500"],
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "Abir | Portfolio",
-  description: "Software engineer portfolio, Y2K desktop OS style.",
+  description: "Software engineer portfolio — atmospheric, soft-editorial style.",
 };
 
 // Sets data-theme before first paint so there's no flash of the wrong palette.
@@ -43,7 +48,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${silkscreen.variable} ${vt323.variable} h-full`}
+      className={`${fraunces.variable} ${inter.variable} ${plexMono.variable} h-full`}
       suppressHydrationWarning
     >
       <head>
@@ -54,9 +59,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-full">
-        <ThemeProvider>
-          <WindowManagerProvider>{children}</WindowManagerProvider>
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

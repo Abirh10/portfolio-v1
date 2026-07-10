@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 type Contribution = { date: string; count: number; level: number };
 
-const WEEKS = 16;
+const WEEKS = 12;
 
 export default function GithubContributions() {
   const [contributions, setContributions] = useState<Contribution[] | null>(null);
@@ -25,7 +25,7 @@ export default function GithubContributions() {
   }, []);
 
   if (contributions === null) {
-    return <p className="text-sm text-win-text-dim">Loading contribution history…</p>;
+    return <p className="text-sm" style={{ color: "var(--ink-dim)" }}>Loading…</p>;
   }
 
   const recent = contributions.slice(-WEEKS * 7);
@@ -33,19 +33,18 @@ export default function GithubContributions() {
 
   return (
     <div>
-      <p className="text-sm mb-3">{total} contributions in the last {WEEKS} weeks</p>
-      <div
-        className="grid grid-flow-col gap-[3px]"
-        style={{ gridTemplateRows: "repeat(7, 10px)" }}
-      >
+      <p className="text-sm mb-2">
+        {total} contributions <span style={{ color: "var(--ink-dim)" }}>· last {WEEKS} weeks</span>
+      </p>
+      <div className="grid grid-flow-col gap-[3px]" style={{ gridTemplateRows: "repeat(7, 9px)" }}>
         {recent.map((day) => (
           <span
             key={day.date}
             title={`${day.date}: ${day.count} contributions`}
-            className="w-[10px] h-[10px]"
+            className="w-[9px] h-[9px] rounded-[2px]"
             style={{
-              background: "var(--win-accent)",
-              opacity: day.level === 0 ? 0.12 : 0.25 + day.level * 0.2,
+              background: "var(--accent)",
+              opacity: day.level === 0 ? 0.12 : 0.3 + day.level * 0.18,
             }}
           />
         ))}

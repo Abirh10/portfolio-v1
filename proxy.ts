@@ -18,7 +18,7 @@ export function proxy(request: NextRequest) {
     default-src 'self';
     script-src ${scriptSrc};
     style-src 'self' 'unsafe-inline';
-    img-src 'self' data:;
+    img-src 'self' data: https://i.scdn.co;
     font-src 'self';
     object-src 'none';
     base-uri 'self';

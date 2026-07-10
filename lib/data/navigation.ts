@@ -1,13 +1,13 @@
 export type NavLink = { id: string; label: string };
 
-// Desktop icons + Start menu + taskbar all read from this list.
+// SiteNav + scrollspy both read from this list.
 export const navLinks: NavLink[] = [
-  { id: "about", label: "ABOUT" },
-  { id: "experience", label: "EXPERIENCE" },
-  { id: "volunteering", label: "VOLUNTEERING" },
-  { id: "projects", label: "PROJECTS" },
-  { id: "skills", label: "SKILLS" },
-  { id: "dashboard", label: "DASHBOARD" },
-  { id: "contact", label: "CONTACT" },
-  { id: "resume", label: "RESUME" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "volunteering", label: "Volunteering" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "now", label: "Now" },
+  { id: "contact", label: "Contact" },
+  { id: "resume", label: "Resume" },
 ];

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 type NowPlaying = {
   configured: boolean;
   isPlaying?: boolean;
-  track?: { name: string; artists: string; url?: string };
+  track?: { name: string; artists: string; url?: string; albumImageUrl?: string };
 };
 
 export default function SpotifyNowPlaying() {
@@ -32,15 +32,23 @@ export default function SpotifyNowPlaying() {
   }, []);
 
   if (data === null) {
-    return <p className="text-sm text-win-text-dim">Connecting…</p>;
+    return <p className="text-sm" style={{ color: "var(--ink-dim)" }}>Connecting…</p>;
   }
 
   if (!data.configured) {
-    return <p className="text-sm text-win-text-dim">Not connected — Spotify offline.</p>;
+    return (
+      <p className="text-sm" style={{ color: "var(--ink-dim)" }}>
+        Not connected — Spotify offline.
+      </p>
+    );
   }
 
   if (!data.isPlaying || !data.track) {
-    return <p className="text-sm text-win-text-dim">Nothing playing right now.</p>;
+    return (
+      <p className="text-sm" style={{ color: "var(--ink-dim)" }}>
+        Nothing playing right now.
+      </p>
+    );
   }
 
   return (
@@ -48,9 +56,25 @@ export default function SpotifyNowPlaying() {
       href={data.track.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block text-sm hover:underline"
+      className="flex items-center gap-3 hover:opacity-80 transition-opacity"
     >
-      <span className="text-win-accent">♪</span> {data.track.name} — {data.track.artists}
+      {data.track.albumImageUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element -- small external avatar, not worth next/image config for one widget
+        <img
+          src={data.track.albumImageUrl}
+          alt=""
+          className="w-9 h-9 rounded-md shrink-0"
+          style={{ border: "1px solid var(--border)" }}
+        />
+      ) : (
+        <span className="w-9 h-9 rounded-md shrink-0 flex items-center justify-center" style={{ background: "var(--surface)" }}>
+          ♪
+        </span>
+      )}
+      <span className="text-sm truncate">
+        <span style={{ color: "var(--ink)" }}>{data.track.name}</span>
+        <span style={{ color: "var(--ink-dim)" }}> — {data.track.artists}</span>
+      </span>
     </a>
   );
 }
