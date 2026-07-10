@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+:root {
+  /* NES/Contra-inspired palette */
+  --nes-black: #0d0a1a;
+  --nes-navy: #101d42;
+  --nes-blue: #1d3a8f;
+  --nes-sky: #274690;
+  --nes-teal: #0f6e5e;
+  --nes-green: #2e8b3d;
+  --nes-green-dark: #1a5c26;
+  --nes-olive: #4f6b2c;
+  --nes-brown: #6b4226;
+  --nes-brown-dark: #3f2716;
+  --nes-tan: #c9a86a;
+  --nes-red: #d9273e;
+  --nes-red-dark: #8c1626;
+  --nes-orange: #e8862a;
+  --nes-yellow: #f5d94e;
+  --nes-white: #f2eee2;
+  --nes-gray: #8a8f9c;
+  --nes-gray-dark: #2b2e3a;
+  --nes-skin: #e8b382;
+  --nes-skin-shadow: #b8804f;
+  --nes-purple: #241b3d;
+  --nes-green-shadow: #0d3b19;
+  --nes-tan-shadow: #9c7c46;
+  --nes-gun-dark: #4a4e59;
+  --nes-vine: #1d4d29;
+  --nes-cloud: #fdeecb;
+  --nes-sun: #f9c74f;
+  --nes-sun-core: #ffe6a0;
+
+  --background: var(--nes-black);
+  --foreground: var(--nes-white);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-nes-black: var(--nes-black);
+  --color-nes-navy: var(--nes-navy);
+  --color-nes-blue: var(--nes-blue);
+  --color-nes-sky: var(--nes-sky);
+  --color-nes-teal: var(--nes-teal);
+  --color-nes-green: var(--nes-green);
+  --color-nes-green-dark: var(--nes-green-dark);
+  --color-nes-olive: var(--nes-olive);
+  --color-nes-brown: var(--nes-brown);
+  --color-nes-brown-dark: var(--nes-brown-dark);
+  --color-nes-tan: var(--nes-tan);
+  --color-nes-red: var(--nes-red);
+  --color-nes-red-dark: var(--nes-red-dark);
+  --color-nes-orange: var(--nes-orange);
+  --color-nes-yellow: var(--nes-yellow);
+  --color-nes-white: var(--nes-white);
+  --color-nes-gray: var(--nes-gray);
+  --color-nes-gray-dark: var(--nes-gray-dark);
+  --color-nes-skin: var(--nes-skin);
+  --color-nes-skin-shadow: var(--nes-skin-shadow);
+  --color-nes-purple: var(--nes-purple);
+  --color-nes-green-shadow: var(--nes-green-shadow);
+  --color-nes-tan-shadow: var(--nes-tan-shadow);
+  --color-nes-gun-dark: var(--nes-gun-dark);
+  --color-nes-vine: var(--nes-vine);
+  --color-nes-cloud: var(--nes-cloud);
+  --color-nes-sun: var(--nes-sun);
+  --color-nes-sun-core: var(--nes-sun-core);
+  --font-pixel-title: var(--font-pixel-title);
+  --font-pixel-body: var(--font-pixel-body);
+}
+
+* {
+  image-rendering: pixelated;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-pixel-body), monospace;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+.font-pixel-title {
+  font-family: var(--font-pixel-title), monospace;
+}
+
+/* Chunky pixelated border, like an NES dialog box */
+.pixel-border {
+  border: 4px solid var(--nes-white);
+  box-shadow:
+    0 0 0 4px var(--nes-black),
+    0 0 0 8px var(--nes-white);
+}
+
+.text-outline {
+  text-shadow:
+    2px 2px 0 var(--nes-black),
+    -2px 2px 0 var(--nes-black),
+    2px -2px 0 var(--nes-black),
+    -2px -2px 0 var(--nes-black);
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+/* CRT scanline + vignette overlay */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.18) 0px,
+      rgba(0, 0, 0, 0.18) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  mix-blend-mode: multiply;
+}
+
+.crt-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 51;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .blink {
+    animation: none;
+  }
+}
