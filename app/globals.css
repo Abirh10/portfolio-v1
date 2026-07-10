@@ -1,77 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  /* NES/Contra-inspired palette */
-  --nes-black: #0d0a1a;
-  --nes-navy: #101d42;
-  --nes-blue: #1d3a8f;
-  --nes-sky: #274690;
-  --nes-teal: #0f6e5e;
-  --nes-green: #2e8b3d;
-  --nes-green-dark: #1a5c26;
-  --nes-olive: #4f6b2c;
-  --nes-brown: #6b4226;
-  --nes-brown-dark: #3f2716;
-  --nes-tan: #c9a86a;
-  --nes-red: #d9273e;
-  --nes-red-dark: #8c1626;
-  --nes-orange: #e8862a;
-  --nes-yellow: #f5d94e;
-  --nes-white: #f2eee2;
-  --nes-gray: #8a8f9c;
-  --nes-gray-dark: #2b2e3a;
-  --nes-skin: #e8b382;
-  --nes-skin-shadow: #b8804f;
-  --nes-purple: #241b3d;
-  --nes-green-shadow: #0d3b19;
-  --nes-tan-shadow: #9c7c46;
-  --nes-gun-dark: #4a4e59;
-  --nes-vine: #1d4d29;
-  --nes-cloud: #fdeecb;
-  --nes-sun: #f9c74f;
-  --nes-sun-core: #ffe6a0;
+  /* Light — classic Win98 gray/beige chrome */
+  --win-face: #c0c0c0;
+  --win-face-hi: #dcdcdc;
+  --win-window-bg: #fdfdf7;
+  --win-text: #0a0a0a;
+  --win-text-dim: #4a4a4a;
+  --win-titlebar-start: #000080;
+  --win-titlebar-end: #1084d0;
+  --win-titlebar-text: #ffffff;
+  --win-border-dark: #404040;
+  --win-accent: #000080;
+  --win-link: #0000ee;
+  --win-desktop-icon-text: #0a0a0a;
+  --win-desktop-icon-selected: #000080;
 
-  --background: var(--nes-black);
-  --foreground: var(--nes-white);
+  --dither-a: #d8d4c4;
+  --dither-b: #14120e;
+
+  --background: var(--win-face);
+  --foreground: var(--win-text);
+}
+
+:root[data-theme="dark"] {
+  /* Dark — black/green terminal */
+  --win-face: #16181a;
+  --win-face-hi: #22262a;
+  --win-window-bg: #0a0d0a;
+  --win-text: #7fe08c;
+  --win-text-dim: #4f9a5c;
+  --win-titlebar-start: #0c1f10;
+  --win-titlebar-end: #1c4423;
+  --win-titlebar-text: #b9ffc4;
+  --win-border-dark: #000000;
+  --win-accent: #33ff66;
+  --win-link: #7fe08c;
+  --win-desktop-icon-text: #b9ffc4;
+  --win-desktop-icon-selected: #1c4423;
+
+  --dither-a: #04140a;
+  --dither-b: #1f8f47;
+
+  --background: var(--win-face);
+  --foreground: var(--win-text);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-nes-black: var(--nes-black);
-  --color-nes-navy: var(--nes-navy);
-  --color-nes-blue: var(--nes-blue);
-  --color-nes-sky: var(--nes-sky);
-  --color-nes-teal: var(--nes-teal);
-  --color-nes-green: var(--nes-green);
-  --color-nes-green-dark: var(--nes-green-dark);
-  --color-nes-olive: var(--nes-olive);
-  --color-nes-brown: var(--nes-brown);
-  --color-nes-brown-dark: var(--nes-brown-dark);
-  --color-nes-tan: var(--nes-tan);
-  --color-nes-red: var(--nes-red);
-  --color-nes-red-dark: var(--nes-red-dark);
-  --color-nes-orange: var(--nes-orange);
-  --color-nes-yellow: var(--nes-yellow);
-  --color-nes-white: var(--nes-white);
-  --color-nes-gray: var(--nes-gray);
-  --color-nes-gray-dark: var(--nes-gray-dark);
-  --color-nes-skin: var(--nes-skin);
-  --color-nes-skin-shadow: var(--nes-skin-shadow);
-  --color-nes-purple: var(--nes-purple);
-  --color-nes-green-shadow: var(--nes-green-shadow);
-  --color-nes-tan-shadow: var(--nes-tan-shadow);
-  --color-nes-gun-dark: var(--nes-gun-dark);
-  --color-nes-vine: var(--nes-vine);
-  --color-nes-cloud: var(--nes-cloud);
-  --color-nes-sun: var(--nes-sun);
-  --color-nes-sun-core: var(--nes-sun-core);
+  --color-win-face: var(--win-face);
+  --color-win-face-hi: var(--win-face-hi);
+  --color-win-window-bg: var(--win-window-bg);
+  --color-win-text: var(--win-text);
+  --color-win-text-dim: var(--win-text-dim);
+  --color-win-titlebar-start: var(--win-titlebar-start);
+  --color-win-titlebar-end: var(--win-titlebar-end);
+  --color-win-titlebar-text: var(--win-titlebar-text);
+  --color-win-border-dark: var(--win-border-dark);
+  --color-win-accent: var(--win-accent);
+  --color-win-link: var(--win-link);
   --font-pixel-title: var(--font-pixel-title);
   --font-pixel-body: var(--font-pixel-body);
-}
-
-* {
-  image-rendering: pixelated;
 }
 
 html {
@@ -82,7 +72,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-pixel-body), monospace;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   line-height: 1.4;
   overflow-x: hidden;
 }
@@ -91,20 +81,29 @@ body {
   font-family: var(--font-pixel-title), monospace;
 }
 
-/* Chunky pixelated border, like an NES dialog box */
-.pixel-border {
-  border: 4px solid var(--nes-white);
-  box-shadow:
-    0 0 0 4px var(--nes-black),
-    0 0 0 8px var(--nes-white);
+/* Classic Windows 3D chrome — CSS outset/inset auto-derives the bevel
+   shades from a single base color, so no manual light/dark corners needed. */
+.bevel-out {
+  border-width: 2px;
+  border-style: outset;
+  border-color: var(--win-face);
+  background: var(--win-face);
 }
 
-.text-outline {
-  text-shadow:
-    2px 2px 0 var(--nes-black),
-    -2px 2px 0 var(--nes-black),
-    2px -2px 0 var(--nes-black),
-    -2px -2px 0 var(--nes-black);
+.bevel-in {
+  border-width: 2px;
+  border-style: inset;
+  border-color: var(--win-face);
+  background: var(--win-face);
+}
+
+.bevel-out:active {
+  border-style: inset;
+}
+
+.win-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--win-face-hi) var(--win-window-bg);
 }
 
 @keyframes blink {
@@ -114,35 +113,6 @@ body {
 
 .blink {
   animation: blink 1s steps(1) infinite;
-}
-
-/* CRT scanline + vignette overlay */
-.crt-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 50;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.18) 0px,
-      rgba(0, 0, 0, 0.18) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-  mix-blend-mode: multiply;
-}
-
-.crt-vignette {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 51;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 55%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
 }
 
 @media (prefers-reduced-motion: reduce) {

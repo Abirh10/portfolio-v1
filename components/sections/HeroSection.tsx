@@ -1,35 +1,36 @@
 import { navLinks } from "@/lib/data/navigation";
+import RetroWindow from "@/components/RetroWindow";
 
 export default function HeroSection() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6"
-    >
-      <p className="font-pixel-title text-[10px] sm:text-xs text-nes-yellow text-outline mb-6 tracking-widest">
-        1986 &nbsp;·&nbsp; PORTFOLIO CORPS
+    <RetroWindow id="hero" title="C:\PORTFOLIO\INDEX.EXE" objCount={navLinks.length}>
+      <p className="font-pixel-title text-[10px] sm:text-xs text-win-accent tracking-widest mb-6">
+        WELCOME TO THE ABIR HIRANI PORTFOLIO SYSTEM
       </p>
-      <h1 className="font-pixel-title text-2xl sm:text-4xl md:text-5xl text-nes-white text-outline leading-relaxed mb-4">
-        ABIR
-      </h1>
-      <p className="font-pixel-title text-xs sm:text-sm text-nes-red text-outline mb-10">
-        SOFTWARE ENGINEER
+      <h1 className="font-pixel-title text-xl sm:text-3xl mb-2">Abir Hirani</h1>
+      <p className="font-pixel-title text-xs sm:text-sm text-win-accent mb-6">
+        Software Engineer
       </p>
-      <p className="max-w-md text-lg sm:text-xl text-nes-white/90 mb-10">
-        Building software one stage at a time. Scroll down to advance the mission,
-        or warp straight to a stage below.
+      <p className="max-w-md text-base sm:text-lg mb-8">
+        Software engineer who likes turning ideas into working systems — from machine
+        learning pipelines to small tools people actually use. Browse the icons on the
+        desktop, or jump straight to a window below.
       </p>
 
-      <nav aria-label="Jump to section" className="mb-14">
-        <p className="font-pixel-title text-[10px] text-nes-yellow mb-4">
-          SELECT A STAGE
-        </p>
-        <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl">
+      <div className="bevel-in px-3 py-2 mb-8 text-sm">
+        <p className="mb-1">Colors allocated: 2.</p>
+        <p className="mb-1">Texture generation: Active.</p>
+        <p>System status: Open to opportunities.</p>
+      </div>
+
+      <p className="font-pixel-title text-[10px] text-win-text-dim mb-3">SELECT A WINDOW</p>
+      <nav aria-label="Jump to section">
+        <ul className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-xl">
           {navLinks.map((link) => (
             <li key={link.id}>
               <a
                 href={`#${link.id}`}
-                className="pixel-border block bg-nes-navy/90 px-3 py-2 font-pixel-title text-[10px] text-nes-white hover:bg-nes-blue transition-colors"
+                className="bevel-out block px-2 py-2 text-center font-pixel-body text-xs text-win-text"
               >
                 {link.label}
               </a>
@@ -37,10 +38,6 @@ export default function HeroSection() {
           ))}
         </ul>
       </nav>
-
-      <p className="font-pixel-title text-[10px] sm:text-xs text-nes-white blink">
-        ▼ PRESS SCROLL TO START ▼
-      </p>
-    </section>
+    </RetroWindow>
   );
 }

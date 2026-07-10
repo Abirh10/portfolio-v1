@@ -1,3 +1,5 @@
+import RetroWindow from "@/components/RetroWindow";
+
 const LINKS = [
   { label: "EMAIL", href: "mailto:beko91872@gmail.com" },
   { label: "GITHUB", href: "https://github.com/Abirh10" },
@@ -6,32 +8,23 @@ const LINKS = [
 
 export default function ContactSection() {
   return (
-    <section
-      id="contact"
-      className="relative min-h-screen py-24 px-6 flex flex-col items-center justify-center text-center"
-    >
-      <h2 className="font-pixel-title text-lg sm:text-2xl text-nes-red text-outline mb-6">
-        GAME OVER
-      </h2>
-      <p className="max-w-md text-lg sm:text-xl text-nes-white/90 mb-10">
-        Thanks for playing through. Want to team up on the next level?
+    <RetroWindow id="contact" title="C:\PORTFOLIO\CONTACT.EXE" objCount={LINKS.length}>
+      <p className="text-base sm:text-lg mb-8">
+        Thanks for stopping by. Want to build something together? Reach out below.
       </p>
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-3">
         {LINKS.map((link) => (
           <a
             key={link.label}
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="pixel-border bg-nes-navy px-6 py-3 font-pixel-title text-xs text-nes-yellow hover:bg-nes-blue transition-colors"
+            className="bevel-out px-5 py-2 text-center font-pixel-title text-xs text-win-text"
           >
             {link.label}
           </a>
         ))}
       </div>
-      <p className="font-pixel-title text-[10px] sm:text-xs text-nes-white blink mt-16">
-        CONTINUE?
-      </p>
-    </section>
+    </RetroWindow>
   );
 }
