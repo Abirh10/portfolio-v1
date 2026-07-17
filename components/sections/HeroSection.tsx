@@ -41,7 +41,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 py-12 overflow-hidden"
     >
       <CelestialResonance
         className="absolute inset-0 z-0"

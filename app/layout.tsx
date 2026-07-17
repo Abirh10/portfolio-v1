@@ -9,7 +9,6 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import CRTOverlay from "@/components/CRTOverlay";
-import CRTWarpFilter from "@/components/CRTWarpFilter";
 
 const pressStart = Press_Start_2P({
   variable: "--font-pixel-title",
@@ -65,8 +64,7 @@ export default function RootLayout({
       className={`${pressStart.variable} ${vt323.variable} ${dotGothic.variable} ${silkscreen.variable} ${jacquarda.variable} ${ebGaramond.variable} h-full`}
     >
       <body className="min-h-full">
-        <CRTWarpFilter />
-        <div className="crt-warp-target">{children}</div>
+        <div className="crt-boot">{children}</div>
         <CRTOverlay />
       </body>
     </html>
