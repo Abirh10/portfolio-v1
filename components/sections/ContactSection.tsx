@@ -1,3 +1,5 @@
+import ContactMascot from "@/components/mascots/ContactMascot";
+
 const LINKS = [
   { label: "EMAIL", href: "mailto:beko91872@gmail.com" },
   { label: "GITHUB", href: "https://github.com/Abirh10" },
@@ -8,12 +10,25 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen py-24 px-6 flex flex-col items-center justify-center text-center"
+      className="page-contact reveal-stagger relative min-h-screen pt-24 pb-44 px-6 flex flex-col items-center justify-center text-center"
     >
-      <h2 className="font-pixel-title text-lg sm:text-2xl text-nes-red text-outline mb-6">
-        GAME OVER
-      </h2>
-      <p className="max-w-md text-lg sm:text-xl text-nes-white/90 mb-10">
+      <ContactMascot />
+      <div className="relative flex items-center justify-center mb-6">
+        <span
+          className="absolute w-20 h-20 rounded-full border-2 radar-ping"
+          style={{ borderColor: "var(--theme-accent)" }}
+          aria-hidden="true"
+        />
+        <span
+          className="absolute w-20 h-20 rounded-full border-2 radar-ping"
+          style={{ borderColor: "var(--theme-accent)", animationDelay: "1.2s" }}
+          aria-hidden="true"
+        />
+        <h2 className="theme-heading text-2xl sm:text-4xl relative">
+          GAME OVER
+        </h2>
+      </div>
+      <p className="max-w-md text-lg sm:text-xl theme-text-dim mb-10">
         Thanks for playing through. Want to team up on the next level?
       </p>
       <div className="flex flex-col sm:flex-row gap-4">
@@ -23,13 +38,13 @@ export default function ContactSection() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="pixel-border bg-nes-navy px-6 py-3 font-pixel-title text-xs text-nes-yellow hover:bg-nes-blue transition-colors"
+            className="theme-btn px-6 py-3 text-xs"
           >
             {link.label}
           </a>
         ))}
       </div>
-      <p className="font-pixel-title text-[10px] sm:text-xs text-nes-white blink mt-16">
+      <p className="font-cyber text-[10px] sm:text-xs theme-accent blink mt-16">
         CONTINUE?
       </p>
     </section>
