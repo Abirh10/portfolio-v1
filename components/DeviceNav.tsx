@@ -21,14 +21,109 @@ const PRESSABLE =
   "active:brightness-90 active:scale-95 active:translate-y-[1px] active:duration-75 " +
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70";
 
-function CartridgeIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="#ffb454" strokeWidth={1.6}>
-      <path d="M12 2 L17 8 V20 A2 2 0 0 1 15 22 H9 A2 2 0 0 1 7 20 V8 Z" strokeLinejoin="round" />
-      <circle cx="12" cy="13" r="2.4" />
-      <path d="M9 8 H15" />
-    </svg>
-  );
+/**
+ * One line-art glyph per cartridge, each echoing that stage's mascot
+ * scene, all drawn in the same warm amber stroke so the set reads as a
+ * family. Falls back to the generic cartridge for unknown ids.
+ */
+function SectionGlyph({ id }: { id: string }) {
+  const shared = {
+    viewBox: "0 0 24 24",
+    className: "w-8 h-8",
+    fill: "none",
+    stroke: "#ffb454",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
+  switch (id) {
+    case "about":
+      // The commander on watch: helmet bust
+      return (
+        <svg {...shared}>
+          <path d="M6 10 V8 A6 5 0 0 1 18 8 V10" />
+          <path d="M4.5 10 H19.5" />
+          <path d="M8 10 V13 A4 4 0 0 0 16 13 V10" />
+          <circle cx="10" cy="12" r="0.5" fill="#ffb454" stroke="none" />
+          <circle cx="14" cy="12" r="0.5" fill="#ffb454" stroke="none" />
+          <path d="M4 21 C4 17.5 8 16.5 12 16.5 C16 16.5 20 17.5 20 21" />
+        </svg>
+      );
+    case "experience":
+      // The operator's terminal: monitor with a prompt
+      return (
+        <svg {...shared}>
+          <rect x="4" y="4.5" width="16" height="11" rx="1.5" />
+          <path d="M7.5 8 L10 10 L7.5 12" />
+          <path d="M12 12 H15.5" />
+          <path d="M12 15.5 V18.5" />
+          <path d="M8.5 18.5 H15.5" />
+        </svg>
+      );
+    case "volunteering":
+      // The gardener: watering can nourishing a sprout
+      return (
+        <svg {...shared}>
+          <rect x="5" y="10.5" width="8.5" height="6.5" rx="1" />
+          <path d="M7.5 10.5 Q9.75 7 12 10.5" />
+          <path d="M5 12.5 L2.5 9.5" />
+          <path d="M18.5 17 V13.5" />
+          <path d="M18.5 13.5 Q16 12.5 16 10" />
+          <path d="M18.5 13.5 Q21 12.5 21 10" />
+        </svg>
+      );
+    case "projects":
+      // The platformer: leaping between stages
+      return (
+        <svg {...shared}>
+          <path d="M2.5 18.5 H9.5" />
+          <path d="M14.5 14.5 H21.5" />
+          <path d="M6.5 16 Q12 6.5 18 12" strokeDasharray="2 2.4" />
+          <circle cx="12" cy="8" r="1.7" />
+        </svg>
+      );
+    case "skills":
+      // The loadout: trusted sword
+      return (
+        <svg {...shared}>
+          <path d="M18.5 5.5 L9 15" />
+          <path d="M18.5 5.5 L19 5 M18.5 5.5 C18.9 4.8 19.2 4.6 19.5 4.5" />
+          <path d="M7 13 L11 17" />
+          <path d="M7.5 16.5 L5.5 18.5" />
+          <circle cx="4.7" cy="19.3" r="1" />
+        </svg>
+      );
+    case "contact":
+      // The signal tower: mast broadcasting
+      return (
+        <svg {...shared}>
+          <path d="M12 19 V9" />
+          <path d="M8.5 19 H15.5" />
+          <circle cx="12" cy="6.8" r="1.3" />
+          <path d="M15.5 9.5 A5.5 5.5 0 0 0 15.5 4" />
+          <path d="M8.5 4 A5.5 5.5 0 0 0 8.5 9.5" />
+        </svg>
+      );
+    case "resume":
+      // The archivist: open game manual
+      return (
+        <svg {...shared}>
+          <path d="M12 7.5 V18" />
+          <path d="M12 7.5 C10 5.8 6.8 5.8 4.8 6.8 V16.8 C6.8 15.8 10 15.8 12 18" />
+          <path d="M12 7.5 C14 5.8 17.2 5.8 19.2 6.8 V16.8 C17.2 15.8 14 15.8 12 18" />
+          <path d="M6.8 9.5 C8 9.1 9.4 9.1 10.3 9.4" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...shared}>
+          <path d="M12 2 L17 8 V20 A2 2 0 0 1 15 22 H9 A2 2 0 0 1 7 20 V8 Z" />
+          <circle cx="12" cy="13" r="2.4" />
+          <path d="M9 8 H15" />
+        </svg>
+      );
+  }
 }
 
 function Screws() {
@@ -396,7 +491,7 @@ export default function DeviceNav() {
                       background: "rgba(255,180,84,0.08)",
                     }}
                   >
-                    <CartridgeIcon />
+                    <SectionGlyph id={current.id} />
                   </span>
                   <span className="font-pixel-body text-sm group-hover:text-white transition-colors" style={{ color: "#f5e6cb" }}>
                     {current.label}.EXE

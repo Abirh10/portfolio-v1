@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 // The home page is statically prerendered at build time, so a per-request
 // nonce CSP can't work: the baked HTML's inline bootstrap scripts would
@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 // (which is exactly what happened on the first production deploy).
 // 'unsafe-inline' for scripts is the workable policy for a static site;
 // everything else stays locked to same-origin.
-export function proxy(request: NextRequest) {
+export function proxy() {
   // React's dev-mode debugging (stack trace reconstruction) needs eval();
   // it never runs in production, so this only loosens the dev server.
   const scriptSrc =
