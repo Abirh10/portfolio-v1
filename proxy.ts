@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Content-Security-Policy needs a fresh nonce per request (for Next's own
-// inline hydration/RSC scripts), so it's set here rather than in next.config.ts.
-// style-src allows 'unsafe-inline' because Framer Motion drives animations
-// via inline style attributes — there is no practical way around that with
-// this library, and CSS-only injection is a much smaller blast radius than
-// script injection (which stays locked down to same-origin + nonce).
+// The home page is statically prerendered at build time, so a per-request
+// nonce CSP can't work: the baked HTML's inline bootstrap scripts would
+// never carry the request's nonce and the browser would block all JS
+// (which is exactly what happened on the first production deploy).
+// 'unsafe-inline' for scripts is the workable policy for a static site;
+// everything else stays locked to same-origin.
 export function proxy(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   // React's dev-mode debugging (stack trace reconstruction) needs eval();
   // it never runs in production, so this only loosens the dev server.
-  const scriptSrc = process.env.NODE_ENV === "development"
-    ? `'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval'`
-    : `'self' 'nonce-${nonce}' 'strict-dynamic'`;
+  const scriptSrc =
+    process.env.NODE_ENV === "development"
+      ? `'self' 'unsafe-inline' 'unsafe-eval'`
+      : `'self' 'unsafe-inline'`;
 
   const csp = `
     default-src 'self';
@@ -29,13 +29,7 @@ export function proxy(request: NextRequest) {
     .replace(/\s{2,}/g, " ")
     .trim();
 
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-nonce", nonce);
-  requestHeaders.set("Content-Security-Policy", csp);
-
-  const response = NextResponse.next({
-    request: { headers: requestHeaders },
-  });
+  const response = NextResponse.next();
   response.headers.set("Content-Security-Policy", csp);
 
   return response;
@@ -43,7 +37,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip static assets — no need to run CSP nonce logic for them.
+    // Skip static assets — no need to run CSP logic for them.
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|pdf)$).*)",
   ],
 };
